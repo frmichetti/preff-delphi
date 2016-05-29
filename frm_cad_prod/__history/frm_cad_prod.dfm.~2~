@@ -1,0 +1,515 @@
+object fm_cad_prod: Tfm_cad_prod
+  Left = 598
+  Top = 165
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
+  Caption = 'Cadastro de Produtos - Preff v2'
+  ClientHeight = 455
+  ClientWidth = 672
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  Menu = menu_princ
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnActivate = FormActivate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 0
+    Top = 0
+    Width = 672
+    Height = 31
+    Align = alTop
+    Alignment = taCenter
+    Caption = 'Cadastro de Produtos'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlue
+    Font.Height = -24
+    Font.Name = 'Earth'
+    Font.Style = []
+    ParentFont = False
+    ExplicitWidth = 460
+  end
+  object btn_primeiro: TSpeedButton
+    Left = 32
+    Top = 404
+    Width = 49
+    Height = 43
+  end
+  object btn_voltar: TSpeedButton
+    Left = 87
+    Top = 404
+    Width = 49
+    Height = 43
+  end
+  object btn_proximo: TSpeedButton
+    Left = 142
+    Top = 404
+    Width = 49
+    Height = 43
+  end
+  object btn_ultimo: TSpeedButton
+    Left = 197
+    Top = 404
+    Width = 49
+    Height = 43
+  end
+  object btn_novo: TSpeedButton
+    Left = 252
+    Top = 404
+    Width = 49
+    Height = 43
+  end
+  object btn_deletar: TSpeedButton
+    Left = 307
+    Top = 404
+    Width = 49
+    Height = 43
+  end
+  object btn_editar: TSpeedButton
+    Left = 362
+    Top = 404
+    Width = 49
+    Height = 43
+  end
+  object btn_aceitar: TSpeedButton
+    Left = 417
+    Top = 404
+    Width = 49
+    Height = 43
+  end
+  object btn_cancelar: TSpeedButton
+    Left = 480
+    Top = 406
+    Width = 46
+    Height = 41
+  end
+  object btn_atualizar: TSpeedButton
+    Left = 536
+    Top = 406
+    Width = 49
+    Height = 41
+  end
+  object GroupBox8: TGroupBox
+    Left = 8
+    Top = 32
+    Width = 657
+    Height = 217
+    Caption = 'Tabela Produtos'
+    TabOrder = 17
+  end
+  object GroupBox7: TGroupBox
+    Left = 296
+    Top = 304
+    Width = 153
+    Height = 41
+    Caption = 'Qtd. Dispon'#237'vel Estoque'
+    TabOrder = 15
+  end
+  object GroupBox6: TGroupBox
+    Left = 176
+    Top = 352
+    Width = 153
+    Height = 41
+    Caption = 'Pre'#231'o de Venda'
+    TabOrder = 14
+  end
+  object GroupBox5: TGroupBox
+    Left = 8
+    Top = 352
+    Width = 153
+    Height = 41
+    Caption = 'Pre'#231'o de Custo'
+    TabOrder = 13
+  end
+  object GroupBox4: TGroupBox
+    Left = 8
+    Top = 304
+    Width = 273
+    Height = 41
+    Caption = 'Descri'#231#227'o do Produto'
+    TabOrder = 12
+  end
+  object GroupBox3: TGroupBox
+    Left = 8
+    Top = 256
+    Width = 81
+    Height = 41
+    Caption = 'C'#243'digo'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 11
+  end
+  object GroupBox2: TGroupBox
+    Left = 104
+    Top = 256
+    Width = 249
+    Height = 41
+    Caption = 'Fornecedor'
+    TabOrder = 10
+  end
+  object GroupBox1: TGroupBox
+    Left = 368
+    Top = 256
+    Width = 217
+    Height = 41
+    Caption = 'Categoria'
+    TabOrder = 9
+  end
+  object dbe_nome_prod: TDBEdit
+    Left = 16
+    Top = 320
+    Width = 257
+    Height = 21
+    DataField = 'nome_prod'
+    DataSource = ds_tab_produtos
+    TabOrder = 0
+  end
+  object dbe_cod_cat: TDBEdit
+    Left = 376
+    Top = 272
+    Width = 49
+    Height = 21
+    DataField = 'cod_categoria'
+    DataSource = ds_tab_produtos
+    Enabled = False
+    ReadOnly = True
+    TabOrder = 1
+  end
+  object dbe_precoc: TDBEdit
+    Left = 16
+    Top = 368
+    Width = 134
+    Height = 21
+    DataField = 'preco_custo'
+    DataSource = ds_tab_produtos
+    TabOrder = 2
+  end
+  object dbe_precov: TDBEdit
+    Left = 184
+    Top = 368
+    Width = 134
+    Height = 21
+    DataField = 'preco_venda'
+    DataSource = ds_tab_produtos
+    TabOrder = 3
+  end
+  object dbe_qtd: TDBEdit
+    Left = 304
+    Top = 320
+    Width = 134
+    Height = 21
+    DataField = 'qtd_disponivel'
+    DataSource = ds_tab_produtos
+    TabOrder = 4
+  end
+  object dbe_cod_produto: TDBEdit
+    Left = 16
+    Top = 272
+    Width = 65
+    Height = 21
+    DataField = 'cod_produto'
+    DataSource = ds_tab_produtos
+    Enabled = False
+    TabOrder = 5
+  end
+  object dbe_cod_forn: TDBEdit
+    Left = 112
+    Top = 272
+    Width = 49
+    Height = 21
+    DataField = 'cod_fornecedor'
+    DataSource = ds_tab_produtos
+    Enabled = False
+    TabOrder = 6
+  end
+  object lcb_cat: TDBLookupComboBox
+    Left = 440
+    Top = 272
+    Width = 137
+    Height = 21
+    DataField = 'cod_categoria'
+    DataSource = ds_tab_produtos
+    KeyField = 'cod_categoria'
+    ListField = 'categoria'
+    ListSource = ds_tab_categoria
+    TabOrder = 7
+  end
+  object lcb_forn: TDBLookupComboBox
+    Left = 168
+    Top = 272
+    Width = 177
+    Height = 21
+    DataField = 'cod_fornecedor'
+    DataSource = ds_tab_produtos
+    KeyField = 'cod_fornecedor'
+    ListField = 'nome_forne'
+    ListSource = ds_tab_fornecedor
+    TabOrder = 8
+  end
+  object dbg_produtos: TDBGrid
+    Left = 16
+    Top = 48
+    Width = 641
+    Height = 193
+    Color = clBtnFace
+    DataSource = ds_qr_produtos
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    Options = [dgTitles, dgRowSelect, dgAlwaysShowSelection]
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 16
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clRed
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = [fsBold]
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'cod_produto'
+        Title.Alignment = taCenter
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'nome_prod'
+        Title.Alignment = taCenter
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'preco_venda'
+        Title.Alignment = taCenter
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'qtd_disponivel'
+        Title.Alignment = taCenter
+        Visible = True
+      end>
+  end
+  object tab_produtos: TTable
+    Active = True
+    AfterEdit = tab_produtosAfterEdit
+    AfterPost = tab_produtosAfterPost
+    AfterDelete = tab_produtosAfterDelete
+    AfterRefresh = tab_produtosAfterRefresh
+    AutoRefresh = True
+    DatabaseName = 'db_farmacia'
+    SessionName = 'Default'
+    TableName = 't_produtos'
+    Left = 504
+    Top = 304
+    object tab_produtoscod_produto: TIntegerField
+      Alignment = taCenter
+      AutoGenerateValue = arAutoInc
+      DisplayLabel = 'C'#243'digo'
+      FieldName = 'cod_produto'
+      DisplayFormat = '#000'
+    end
+    object tab_produtosnome_prod: TStringField
+      Alignment = taCenter
+      DisplayLabel = 'Descri'#231#227'o do Produto'
+      FieldName = 'nome_prod'
+      Required = True
+      Size = 30
+    end
+    object tab_produtoscod_categoria: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Categoria'
+      FieldName = 'cod_categoria'
+      Required = True
+      DisplayFormat = '#000'
+    end
+    object tab_produtospreco_custo: TFloatField
+      Alignment = taCenter
+      DisplayLabel = 'Pre'#231'o Custo'
+      FieldName = 'preco_custo'
+      Required = True
+    end
+    object tab_produtospreco_venda: TFloatField
+      Alignment = taCenter
+      DisplayLabel = 'Pre'#231'o Venda'
+      FieldName = 'preco_venda'
+      Required = True
+    end
+    object tab_produtosqtd_disponivel: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Qtd Disponivel Estoque'
+      FieldName = 'qtd_disponivel'
+      Required = True
+      DisplayFormat = '#000'
+    end
+    object tab_produtoscod_fornecedor: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Fornecedor'
+      FieldName = 'cod_fornecedor'
+      Required = True
+      DisplayFormat = '#000'
+    end
+  end
+  object ds_tab_produtos: TDataSource
+    DataSet = tab_produtos
+    Left = 520
+    Top = 352
+  end
+  object menu_princ: TMainMenu
+    Left = 616
+    Top = 256
+    object Arquivo1: TMenuItem
+      Caption = 'Arquivo'
+    end
+    object Ajuda1: TMenuItem
+      Caption = 'Ajuda'
+    end
+  end
+  object ds_tab_categoria: TDataSource
+    DataSet = tab_categoria
+    Left = 464
+    Top = 352
+  end
+  object tab_categoria: TTable
+    Active = True
+    AutoRefresh = True
+    DatabaseName = 'db_farmacia'
+    TableName = 't_categoria'
+    Left = 472
+    Top = 304
+    object tab_categoriacategoria: TStringField
+      Alignment = taCenter
+      FieldName = 'categoria'
+      Required = True
+      Size = 15
+    end
+    object tab_categoriacod_categoria: TIntegerField
+      Alignment = taCenter
+      FieldName = 'cod_categoria'
+    end
+  end
+  object tab_fornecedor: TTable
+    Active = True
+    AutoRefresh = True
+    DatabaseName = 'db_farmacia'
+    SessionName = 'Default'
+    TableName = 't_fornecedor'
+    Left = 560
+    Top = 304
+    object tab_fornecedorcod_fornecedor: TIntegerField
+      FieldName = 'cod_fornecedor'
+    end
+    object tab_fornecedornome_forne: TStringField
+      FieldName = 'nome_forne'
+      Required = True
+      Size = 15
+    end
+    object tab_fornecedorcnpj: TFloatField
+      FieldName = 'cnpj'
+    end
+    object tab_fornecedorendereco: TStringField
+      FieldName = 'endereco'
+      Required = True
+      Size = 80
+    end
+    object tab_fornecedorbairro: TStringField
+      FieldName = 'bairro'
+      Required = True
+    end
+    object tab_fornecedorcidade: TStringField
+      FieldName = 'cidade'
+      Required = True
+      Size = 15
+    end
+    object tab_fornecedorestado: TStringField
+      FieldName = 'estado'
+      Required = True
+      Size = 2
+    end
+    object tab_fornecedorcep: TIntegerField
+      FieldName = 'cep'
+      Required = True
+    end
+    object tab_fornecedortelefone: TIntegerField
+      FieldName = 'telefone'
+      Required = True
+    end
+  end
+  object ds_tab_fornecedor: TDataSource
+    DataSet = tab_fornecedor
+    Left = 400
+    Top = 352
+  end
+  object qr_produtos: TQuery
+    Active = True
+    AutoRefresh = True
+    DatabaseName = 'db_farmacia'
+    SQL.Strings = (
+      
+        'SELECT p.`cod_produto` , c.`categoria`, f.`nome_forne`, p.`nome_' +
+        'prod`, p.`preco_custo`, p.`preco_venda`, p.`qtd_disponivel`'
+      
+        ' FROM t_produtos p inner join t_categoria c inner join t_fornece' +
+        'dor f'
+      'on (p.cod_categoria = c.cod_categoria)'
+      'and (p.cod_fornecedor = f.cod_fornecedor)')
+    Left = 616
+    Top = 296
+    object qr_produtoscod_produto: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'C'#243'digo Produto'
+      FieldName = 'cod_produto'
+      DisplayFormat = '#000'
+    end
+    object qr_produtoscategoria: TStringField
+      Alignment = taCenter
+      DisplayLabel = 'Categoria'
+      FieldName = 'categoria'
+      Size = 25
+    end
+    object qr_produtosnome_forne: TStringField
+      Alignment = taCenter
+      DisplayLabel = 'Fornecedor'
+      FieldName = 'nome_forne'
+      Size = 40
+    end
+    object qr_produtosnome_prod: TStringField
+      Alignment = taCenter
+      DisplayLabel = 'Descri'#231#227'o do Produto'
+      FieldName = 'nome_prod'
+      Size = 30
+    end
+    object qr_produtospreco_custo: TFloatField
+      Alignment = taCenter
+      DisplayLabel = 'Pre'#231'o Custo'
+      FieldName = 'preco_custo'
+    end
+    object qr_produtospreco_venda: TFloatField
+      Alignment = taCenter
+      DisplayLabel = 'Pre'#231'o Venda'
+      FieldName = 'preco_venda'
+    end
+    object qr_produtosqtd_disponivel: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Quantidade Dispon'#237'vel'
+      FieldName = 'qtd_disponivel'
+    end
+  end
+  object ds_qr_produtos: TDataSource
+    DataSet = qr_produtos
+    Left = 600
+    Top = 352
+  end
+end

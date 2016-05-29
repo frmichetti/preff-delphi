@@ -1,0 +1,8 @@
+select  t_compra.cod_compra as 'Código Compra', t_compra.num_nota_fiscal as 'Número Nota Fiscal', t_aux_compra.cod_produto as 'Código Produto',t_aux_compra.quantidade as 'Quantidade',t_aux_compra.valor_unit as 'Valor Unitário',
+truncate (t_aux_compra.valor_unit * t_aux_compra.quantidade,2) as 'Subtotal'
+ from t_compra inner join t_aux_compra on (t_compra.cod_compra = t_aux_compra.cod_compra);
+
+
+select  t_compra.cod_compra as 'Código Compra', t_compra.num_nota_fiscal as 'Número Nota Fiscal', t_produtos.nome_prod as 'Produto',t_aux_compra.quantidade as 'Quantidade',t_aux_compra.valor_unit as 'Valor Unitário',
+truncate (t_aux_compra.valor_unit * t_aux_compra.quantidade,2) as 'Subtotal'
+ from t_compra inner join t_aux_compra  inner join t_produtos on (t_compra.cod_compra = t_aux_compra.cod_compra) and (t_aux_compra.cod_produto=t_produtos.cod_produto);

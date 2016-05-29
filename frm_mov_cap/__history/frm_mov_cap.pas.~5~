@@ -1,0 +1,206 @@
+unit frm_mov_cap;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, ExtCtrls, DBCtrls, Menus, DB, DBTables,
+  StdCtrls, Mask, Buttons;
+
+type
+  Tfm_mov_cap = class(TForm)
+    menu_princ: TMainMenu;
+    Arquivo1: TMenuItem;
+    Ajuda1: TMenuItem;
+    tab_mov_cap: TTable;
+    tab_mov_capcod_compra: TIntegerField;
+    tab_mov_capvalor: TFloatField;
+    tab_mov_capdatav: TDateField;
+    tab_mov_cappaga: TSmallintField;
+    dbe_cod_compra: TDBEdit;
+    ds_cap: TDataSource;
+    dbe_valor: TDBEdit;
+    dbe_data_venc: TDBEdit;
+    dbe_paga: TDBEdit;
+    GroupBox1: TGroupBox;
+    GroupBox2: TGroupBox;
+    GroupBox3: TGroupBox;
+    GroupBox4: TGroupBox;
+    tab_mov_capdatac: TDateField;
+    dbe_data_compra: TDBEdit;
+    GroupBox5: TGroupBox;
+    dbg_cap: TDBGrid;
+    GroupBox6: TGroupBox;
+    Label1: TLabel;
+    btn_cancelar: TSpeedButton;
+    BalloonHint1: TBalloonHint;
+    btn_atualizar: TSpeedButton;
+    btn_aceitar: TSpeedButton;
+    btn_editar: TSpeedButton;
+    btn_deletar: TSpeedButton;
+    btn_novo: TSpeedButton;
+    btn_ultimo: TSpeedButton;
+    btn_proximo: TSpeedButton;
+    btn_voltar: TSpeedButton;
+    btn_primeiro: TSpeedButton;
+    procedure checa_botoes;
+    procedure btn_primeiroClick(Sender: TObject);
+    procedure btn_voltarClick(Sender: TObject);
+    procedure btn_proximoClick(Sender: TObject);
+    procedure btn_ultimoClick(Sender: TObject);
+    procedure btn_editarClick(Sender: TObject);
+    procedure btn_aceitarClick(Sender: TObject);
+    procedure btn_cancelarClick(Sender: TObject);
+    procedure btn_atualizarClick(Sender: TObject);
+    procedure btn_deletarClick(Sender: TObject);
+    procedure btn_novoClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fm_mov_cap: Tfm_mov_cap;
+
+implementation
+
+{$R *.dfm}
+
+procedure Tfm_mov_cap.checa_botoes;
+begin
+if fm_mov_cap.tab_mov_cap.State = dsBrowse then
+ begin
+  fm_mov_cap.dbe_cod_compra.Enabled:=False;
+  fm_mov_cap.dbe_data_compra.Enabled:=False;
+  fm_mov_cap.dbe_data_venc.Enabled:=False;
+  fm_mov_cap.dbe_valor.Enabled:=False;
+  fm_mov_cap.dbe_paga.Enabled:=False;
+  fm_mov_cap.btn_aceitar.Enabled:=false;
+  fm_mov_cap.btn_cancelar.Enabled:=false;
+  fm_mov_cap.btn_primeiro.Enabled:=true;
+  fm_mov_cap.btn_voltar.Enabled:=true;
+  fm_mov_cap.btn_proximo.Enabled:=true;
+  fm_mov_cap.btn_ultimo.Enabled:=true;
+  fm_mov_cap.btn_novo.Enabled:=true;
+  fm_mov_cap.btn_deletar.Enabled:=true;
+  fm_mov_cap.btn_editar.Enabled:=true;
+  fm_mov_cap.btn_atualizar.Enabled:=true;
+ end
+ else
+ begin
+  fm_mov_cap.dbe_cod_compra.Enabled:=True;
+  fm_mov_cap.dbe_data_compra.Enabled:=True;
+  fm_mov_cap.dbe_data_venc.Enabled:=True;
+  fm_mov_cap.dbe_valor.Enabled:=True;
+  fm_mov_cap.dbe_paga.Enabled:=True; 
+  fm_mov_cap.btn_aceitar.Enabled:=true;
+  fm_mov_cap.btn_cancelar.Enabled:=true;
+  fm_mov_cap.btn_primeiro.Enabled:=false;
+  fm_mov_cap.btn_voltar.Enabled:=false;
+  fm_mov_cap.btn_proximo.Enabled:=false;
+  fm_mov_cap.btn_ultimo.Enabled:=false;
+  fm_mov_cap.btn_novo.Enabled:=false;
+  fm_mov_cap.btn_deletar.Enabled:=false;
+  fm_mov_cap.btn_editar.Enabled:=false;
+  fm_mov_cap.btn_atualizar.Enabled:=false;
+
+ end;
+end;
+
+procedure Tfm_mov_cap.btn_primeiroClick(Sender: TObject);
+begin
+if tab_mov_cap.State = dsBrowse then
+tab_mov_cap.First;
+checa_botoes;
+
+end;
+
+procedure Tfm_mov_cap.btn_voltarClick(Sender: TObject);
+begin
+if tab_mov_cap.State = dsBrowse then
+tab_mov_cap.Prior;
+checa_botoes;
+end;
+
+procedure Tfm_mov_cap.btn_proximoClick(Sender: TObject);
+begin
+if tab_mov_cap.State = dsBrowse then
+tab_mov_cap.Next;
+checa_botoes;
+end;
+
+procedure Tfm_mov_cap.btn_ultimoClick(Sender: TObject);
+begin
+if tab_mov_cap.State = dsBrowse then
+tab_mov_cap.Last;
+checa_botoes;
+end;
+
+procedure Tfm_mov_cap.btn_editarClick(Sender: TObject);
+begin
+if tab_mov_cap.State = dsBrowse then
+tab_mov_cap.Edit;
+checa_botoes;
+end;
+
+procedure Tfm_mov_cap.btn_aceitarClick(Sender: TObject);
+begin
+if tab_mov_cap.State <> dsBrowse then
+tab_mov_cap.Post;
+checa_botoes;
+end;
+
+procedure Tfm_mov_cap.btn_cancelarClick(Sender: TObject);
+begin
+if tab_mov_cap.State <> dsBrowse then
+tab_mov_cap.Cancel;
+checa_botoes;
+end;
+
+procedure Tfm_mov_cap.btn_atualizarClick(Sender: TObject);
+begin
+if tab_mov_cap.State = dsBrowse then
+tab_mov_cap.Refresh;
+checa_botoes;
+end;
+
+procedure Tfm_mov_cap.btn_deletarClick(Sender: TObject);
+var resp:Integer;
+begin
+resp:=0;
+if tab_mov_cap.State = dsBrowse then
+ if tab_mov_capcod_compra.Value=0 then
+  begin
+  MessageDlg('O Banco de Dados está vazio',mtWarning,[mbok],0);
+  end
+  else
+  resp:=Application.MessageBox('Você deseja realmente excluir este registro?','Confirmar Exclusão',308);
+  if resp = 6 then
+  begin
+  tab_mov_cap.Delete;
+  MessageDlg('Registro Excluido',mtInformation,[mbok],0);
+  checa_botoes;
+  end
+end;
+
+procedure Tfm_mov_cap.btn_novoClick(Sender: TObject);
+var vcod:integer;
+begin
+if tab_mov_cap.State = dsBrowse then
+tab_mov_cap.Last;
+vcod:=tab_mov_capcod_compra.Value+1;
+tab_mov_cap.Append;
+tab_mov_capcod_compra.Value:=vcod;
+dbe_cod_compra.Text:=IntToStr(vcod);
+checa_botoes;
+end;
+
+procedure Tfm_mov_cap.FormActivate(Sender: TObject);
+begin
+checa_botoes;
+end;
+
+end.

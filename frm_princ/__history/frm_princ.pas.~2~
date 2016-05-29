@@ -1,0 +1,153 @@
+unit frm_princ;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menus, DB, DBTables, ExtCtrls, Buttons, XPMan, CustomizeDlg,
+  ComCtrls;
+
+type
+  Tfm_princ = class(TForm)
+    menu_princ: TMainMenu;
+    menu_cad: TMenuItem;
+    sm_cad_cat: TMenuItem;
+    sm_cad_cli: TMenuItem;
+    sm_cad_prod: TMenuItem;
+    sm_cad_forn: TMenuItem;
+    sm_cad_func: TMenuItem;
+    menu_mov: TMenuItem;
+    sm_mov_comp: TMenuItem;
+    sm_mov_vend: TMenuItem;
+    sm_mov_cap: TMenuItem;
+    sm_mov_car: TMenuItem;
+    menu_cons: TMenuItem;
+    sm_cons_cat: TMenuItem;
+    sm_cons_cli: TMenuItem;
+    sm_cons_prod: TMenuItem;
+    sm_cons_forn: TMenuItem;
+    sm_cons_func: TMenuItem;
+    menu_relat: TMenuItem;
+    sm_rel_comp: TMenuItem;
+    sm_rel_vend: TMenuItem;
+    sm_rel_estoq: TMenuItem;
+    sm_rel_cap: TMenuItem;
+    sm_rel_car: TMenuItem;
+    sm_rel_cli: TMenuItem;
+    sm_rel_vpf: TMenuItem;
+    sm_rel_ldp: TMenuItem;
+    menu_ajuda: TMenuItem;
+    sm_ajuda_sobre: TMenuItem;
+    sm_ajuda_top: TMenuItem;
+    menu_sair: TMenuItem;
+    sm_sair_enc: TMenuItem;
+    sm_sair_sair: TMenuItem;
+    con_farmacia: TDatabase;
+    im_logo: TImage;
+    sb_cad_prod: TSpeedButton;
+    sb_cad_cat: TSpeedButton;
+    sb_cad_cli: TSpeedButton;
+    sb_cad_forn: TSpeedButton;
+    sb_cad_func: TSpeedButton;
+    sb_mov_car: TSpeedButton;
+    sb_mov_cap: TSpeedButton;
+    sb_mov_vend: TSpeedButton;
+    sb_mov_comp: TSpeedButton;
+    StatusBar1: TStatusBar;
+    procedure sb_cad_catClick(Sender: TObject);
+    procedure sb_cad_cliClick(Sender: TObject);
+    procedure sb_cad_prodClick(Sender: TObject);
+    procedure sb_cad_fornClick(Sender: TObject);
+    procedure sb_cad_funcClick(Sender: TObject);
+    procedure sb_mov_compClick(Sender: TObject);
+    procedure sb_mov_vendClick(Sender: TObject);
+    procedure sb_mov_capClick(Sender: TObject);
+    procedure sb_mov_carClick(Sender: TObject);
+    procedure sm_cad_catClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fm_princ: Tfm_princ;
+
+implementation
+
+uses frm_cad_cat, frm_cad_cli,frm_cad_prod, frm_cad_forn,frm_cad_func,
+frm_mov_compra,frm_mov_venda,frm_mov_cap,frm_mov_car,Math;
+
+{$R *.dfm}
+
+procedure Tfm_princ.sb_cad_catClick(Sender: TObject);
+begin
+if not Assigned (fm_cad_cat)then
+  fm_cad_cat:= Tfm_cad_cat.create(self);
+  fm_cad_cat.show;
+end;
+
+procedure Tfm_princ.sb_cad_cliClick(Sender: TObject);
+begin
+if not Assigned (fm_cad_cli)then
+  fm_cad_cli:= Tfm_cad_cli.create(self);
+  fm_cad_cli.show;
+end;
+
+procedure Tfm_princ.sb_cad_prodClick(Sender: TObject);
+begin
+if not Assigned (fm_cad_prod)then
+  fm_cad_prod:= Tfm_cad_prod.create(self);
+  fm_cad_prod.show;
+end;
+
+procedure Tfm_princ.sb_cad_fornClick(Sender: TObject);
+begin
+  if not Assigned (fm_cad_forn)then
+  fm_cad_forn:= Tfm_cad_forn.create(self);
+  fm_cad_forn.show;
+end;
+
+procedure Tfm_princ.sb_cad_funcClick(Sender: TObject);
+begin
+  if not Assigned (fm_cad_func)then
+  fm_cad_func:= Tfm_cad_func.create(self);
+  fm_cad_func.show;
+end;
+
+procedure Tfm_princ.sb_mov_compClick(Sender: TObject);
+begin
+  if not Assigned (fm_mov_comp)then
+  fm_mov_comp:= Tfm_mov_comp.create(self);
+  fm_mov_comp.show;
+end;
+
+procedure Tfm_princ.sb_mov_vendClick(Sender: TObject);
+begin
+if not Assigned (fm_mov_venda)then
+  fm_mov_venda:= Tfm_mov_venda.create(self);
+  fm_mov_venda.show;
+end;
+
+procedure Tfm_princ.sb_mov_capClick(Sender: TObject);
+begin
+  if not Assigned (fm_mov_cap)then
+  fm_mov_cap:= Tfm_mov_cap.create(self);
+  fm_mov_cap.show;
+end;
+
+procedure Tfm_princ.sb_mov_carClick(Sender: TObject);
+begin
+  if not Assigned (fm_mov_car)then
+  fm_mov_car:= Tfm_mov_car.create(self);
+  fm_mov_car.show;
+end;
+
+procedure Tfm_princ.sm_cad_catClick(Sender: TObject);
+begin
+  if not Assigned (fm_cad_cat)then
+  fm_cad_cat:= Tfm_cad_cat.create(self);
+  fm_cad_cat.show;
+end;
+
+end.

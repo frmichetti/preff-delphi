@@ -1,0 +1,310 @@
+unit frm_mov_venda;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menus, Grids, DBGrids, DB, StdCtrls, Mask, DBCtrls,
+  ExtCtrls, DBTables, Buttons;
+
+type
+  Tfm_mov_venda = class(TForm)
+    menu_princ: TMainMenu;
+    Arquivo1: TMenuItem;
+    Ajuda1: TMenuItem;
+    tab_venda: TTable;
+    tab_clientes: TTable;
+    tab_funcionario: TTable;
+    tab_vendacod_venda: TIntegerField;
+    tab_vendacod_cliente: TIntegerField;
+    tab_vendacod_funcionario: TIntegerField;
+    tab_vendavalor: TFloatField;
+    dbe_cod_venda: TDBEdit;
+    ds_venda: TDataSource;
+    dbe_cod_cliente: TDBEdit;
+    dbe_cod_func: TDBEdit;
+    dbe_valortotal: TDBEdit;
+    tab_clientescod_cliente: TIntegerField;
+    tab_clientesnome_cli: TStringField;
+    tab_clientesendereco: TStringField;
+    tab_clientesbairro: TStringField;
+    tab_clientescidade: TStringField;
+    tab_clientesestado: TStringField;
+    tab_clientescep: TIntegerField;
+    tab_clientestelefone: TIntegerField;
+    tab_clientescpf: TFloatField;
+    ds_clientes: TDataSource;
+    tab_funcionariocod_funcionario: TIntegerField;
+    tab_funcionarionome_func: TStringField;
+    tab_funcionarioendereco: TStringField;
+    tab_funcionariobairro: TStringField;
+    tab_funcionariocidade: TStringField;
+    tab_funcionariocep: TIntegerField;
+    tab_funcionarioestado: TStringField;
+    tab_funcionariocpf: TFloatField;
+    tab_funcionariotelefone: TIntegerField;
+    ds_funcionario: TDataSource;
+    GroupBox1: TGroupBox;
+    GroupBox2: TGroupBox;
+    dbl_cliente: TDBLookupComboBox;
+    dbl_func: TDBLookupComboBox;
+    GroupBox3: TGroupBox;
+    btn_itens_venda: TSpeedButton;
+    GroupBox4: TGroupBox;
+    GroupBox5: TGroupBox;
+    tab_vendadatav: TDateField;
+    dbe_data: TDBEdit;
+    qr_venda: TQuery;
+    qr_vendacod_venda: TIntegerField;
+    qr_vendanome_cli: TStringField;
+    qr_vendanome_func: TStringField;
+    qr_vendadatav: TDateField;
+    qr_vendavalor: TFloatField;
+    ds_qr_venda: TDataSource;
+    Label1: TLabel;
+    btn_cancelar: TSpeedButton;
+    BalloonHint1: TBalloonHint;
+    btn_atualizar: TSpeedButton;
+    btn_aceitar: TSpeedButton;
+    btn_editar: TSpeedButton;
+    btn_deletar: TSpeedButton;
+    btn_novo: TSpeedButton;
+    btn_ultimo: TSpeedButton;
+    btn_proximo: TSpeedButton;
+    btn_voltar: TSpeedButton;
+    btn_primeiro: TSpeedButton;
+    procedure checa_botoes;
+    procedure btn_itens_vendaClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure btn_primeiroClick(Sender: TObject);
+    procedure btn_voltarClick(Sender: TObject);
+    procedure btn_proximoClick(Sender: TObject);
+    procedure btn_ultimoClick(Sender: TObject);
+    procedure btn_editarClick(Sender: TObject);
+    procedure btn_atualizarClick(Sender: TObject);
+    procedure atualiza_query;
+    procedure btn_novoClick(Sender: TObject);
+    procedure btn_deletarClick(Sender: TObject);
+    procedure btn_aceitarClick(Sender: TObject);
+    procedure btn_cancelarClick(Sender: TObject);
+    procedure tab_vendaAfterInsert(DataSet: TDataSet);
+    procedure tab_vendaAfterEdit(DataSet: TDataSet);
+    procedure tab_vendaAfterCancel(DataSet: TDataSet);
+    procedure tab_vendaAfterDelete(DataSet: TDataSet);
+    procedure tab_vendaAfterPost(DataSet: TDataSet);
+    procedure tab_vendaAfterRefresh(DataSet: TDataSet);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fm_mov_venda: Tfm_mov_venda;
+
+implementation
+
+uses frm_aux_venda;
+{$R *.dfm}
+
+procedure Tfm_mov_venda.checa_botoes;
+begin
+if fm_mov_venda.tab_venda.State = dsBrowse then
+ begin
+  fm_mov_venda.dbe_cod_venda.Enabled:=False;
+  fm_mov_venda.btn_itens_venda.Enabled:=True;
+  fm_mov_venda.dbe_cod_cliente.Enabled:=False;
+  fm_mov_venda.dbl_cliente.Enabled:=False;
+  fm_mov_venda.dbe_cod_func.Enabled:=False;
+  fm_mov_venda.dbl_func.Enabled:=False;
+  fm_mov_venda.dbe_data.Enabled:=False;
+  fm_mov_venda.dbe_valortotal.Enabled:=False;
+  fm_mov_venda.btn_aceitar.Enabled:=false;
+  fm_mov_venda.btn_cancelar.Enabled:=false;
+  fm_mov_venda.btn_primeiro.Enabled:=true;
+  fm_mov_venda.btn_voltar.Enabled:=true;
+  fm_mov_venda.btn_proximo.Enabled:=true;
+  fm_mov_venda.btn_ultimo.Enabled:=true;
+  fm_mov_venda.btn_novo.Enabled:=true;
+  fm_mov_venda.btn_deletar.Enabled:=true;
+  fm_mov_venda.btn_editar.Enabled:=true;
+  fm_mov_venda.btn_atualizar.Enabled:=true;
+ end
+ else
+ begin
+  fm_mov_venda.dbe_cod_venda.Enabled:=True;
+  fm_mov_venda.btn_itens_venda.Enabled:=False;
+  fm_mov_venda.dbe_cod_cliente.Enabled:=True;
+  fm_mov_venda.dbl_cliente.Enabled:=True;
+  fm_mov_venda.dbe_cod_func.Enabled:=True;
+  fm_mov_venda.dbl_func.Enabled:=True;
+  fm_mov_venda.dbe_data.Enabled:=True;
+  fm_mov_venda.dbe_valortotal.Enabled:=True;
+  fm_mov_venda.btn_aceitar.Enabled:=true;
+  fm_mov_venda.btn_cancelar.Enabled:=true;
+  fm_mov_venda.btn_primeiro.Enabled:=false;
+  fm_mov_venda.btn_voltar.Enabled:=false;
+  fm_mov_venda.btn_proximo.Enabled:=false;
+  fm_mov_venda.btn_ultimo.Enabled:=false;
+  fm_mov_venda.btn_novo.Enabled:=false;
+  fm_mov_venda.btn_deletar.Enabled:=false;
+  fm_mov_venda.btn_editar.Enabled:=false;
+  fm_mov_venda.btn_atualizar.Enabled:=false;
+
+ end
+end;
+
+procedure Tfm_mov_venda.btn_itens_vendaClick(Sender: TObject);
+begin
+if tab_vendacod_venda.Value = 0 then
+begin
+ShowMessage('Nenhum item cadastrado');
+end
+else
+begin
+if not Assigned (fm_aux_venda)then
+  fm_aux_venda:= Tfm_aux_venda.create(self);
+  fm_aux_venda.show;
+  end;
+  end;
+
+procedure Tfm_mov_venda.FormActivate(Sender: TObject);
+begin
+checa_botoes;
+end;
+
+procedure Tfm_mov_venda.btn_primeiroClick(Sender: TObject);
+begin
+if tab_venda.State = dsBrowse then
+tab_venda.First;
+qr_venda.First;
+checa_botoes;
+end;
+
+procedure Tfm_mov_venda.btn_voltarClick(Sender: TObject);
+begin
+if tab_venda.State = dsBrowse then
+tab_venda.Prior;
+qr_venda.Prior;
+checa_botoes;
+end;
+
+procedure Tfm_mov_venda.btn_proximoClick(Sender: TObject);
+begin
+if tab_venda.State = dsBrowse then
+tab_venda.Next;
+qr_venda.Next;
+checa_botoes;
+end;
+
+procedure Tfm_mov_venda.btn_ultimoClick(Sender: TObject);
+begin
+if tab_venda.State = dsBrowse then
+tab_venda.Last;
+qr_venda.Last;
+checa_botoes;
+end;
+
+procedure Tfm_mov_venda.btn_editarClick(Sender: TObject);
+begin
+if tab_venda.State = dsBrowse then
+tab_venda.Edit;
+checa_botoes;
+end;
+
+procedure Tfm_mov_venda.btn_atualizarClick(Sender: TObject);
+begin
+if tab_venda.State = dsBrowse then
+tab_venda.Refresh;
+checa_botoes;
+
+
+end;
+
+procedure Tfm_mov_venda.atualiza_query;
+begin
+qr_venda.Close;
+qr_venda.SQL.Clear;
+qr_venda.SQL.Add('SELECT vd.`cod_venda`,c.`nome_cli`,f.`nome_func` ,vd.`datav`,vd.`valor`');
+qr_venda.SQL.Add('FROM t_venda vd INNER JOIN t_funcionario f INNER JOIN t_clientes c');
+qr_venda.SQL.Add('ON (vd.`cod_funcionario` = f.`cod_funcionario`) AND (vd.`cod_cliente` = c.`cod_cliente`);');
+qr_venda.ExecSQL;
+qr_venda.Active:=True;
+end;
+
+procedure Tfm_mov_venda.btn_novoClick(Sender: TObject);
+var vcod:integer;
+begin
+if tab_venda.State = dsBrowse then
+tab_venda.Last;
+vcod:=tab_vendacod_venda.Value+1;
+tab_venda.Append;
+tab_vendacod_venda.Value:=vcod;
+dbe_cod_venda.Text:=IntToStr(vcod);
+checa_botoes;
+end;
+
+procedure Tfm_mov_venda.btn_deletarClick(Sender: TObject);
+var resp:Integer;
+begin
+resp:=0;
+if tab_venda.State = dsBrowse then
+ if tab_vendacod_venda.Value=0 then
+  begin
+  MessageDlg('O Banco de Dados está vazio',mtWarning,[mbok],0);
+  end
+  else
+  resp:=Application.MessageBox('Você deseja realmente excluir este registro?','Confirmar Exclusão',308);
+  if resp = 6 then
+  begin
+  tab_venda.Delete;
+  MessageDlg('Registro Excluido',mtInformation,[mbok],0);
+  checa_botoes;
+  end;
+end;
+
+procedure Tfm_mov_venda.btn_aceitarClick(Sender: TObject);
+begin
+if tab_venda.State <> dsBrowse then
+tab_venda.Post;
+checa_botoes;
+end;
+
+procedure Tfm_mov_venda.btn_cancelarClick(Sender: TObject);
+begin
+if tab_venda.State <> dsBrowse then
+tab_venda.Cancel;
+checa_botoes;
+end;
+
+procedure Tfm_mov_venda.tab_vendaAfterInsert(DataSet: TDataSet);
+begin
+atualiza_query;
+end;
+
+procedure Tfm_mov_venda.tab_vendaAfterEdit(DataSet: TDataSet);
+begin
+atualiza_query;
+end;
+
+procedure Tfm_mov_venda.tab_vendaAfterCancel(DataSet: TDataSet);
+begin
+atualiza_query;
+end;
+
+procedure Tfm_mov_venda.tab_vendaAfterDelete(DataSet: TDataSet);
+begin
+atualiza_query;
+end;
+
+procedure Tfm_mov_venda.tab_vendaAfterPost(DataSet: TDataSet);
+begin
+atualiza_query;
+end;
+
+procedure Tfm_mov_venda.tab_vendaAfterRefresh(DataSet: TDataSet);
+begin
+atualiza_query;
+end;
+
+end.
